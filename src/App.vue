@@ -1,6 +1,7 @@
 <template>
   <nav>
     <navbar></navbar>
+    <h1>55555555555</h1>
   </nav>
   <router-view />
 </template>
