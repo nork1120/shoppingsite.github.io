@@ -1,18 +1,79 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="wrap">
+      <div class="text">
+        <h1
+          data-aos="fade-left"
+          data-aos-easing="ease-in-sine"
+          data-aos-duration="1000"
+        >
+          你的故事由你選擇<br />從哪開始
+        </h1>
+        <div
+          class="textbutt"
+          data-aos="fade-right"
+          data-aos-easing="ease-in-sine"
+          data-aos-duration="1000"
+        >
+          <h1>海釣行程</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="cont">
+    <ContEnt></ContEnt>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import ContEnt from "../components/ContEnt.vue";
+import AOS from "aos";
 export default {
-  name: 'HomeView',
+  name: "HomeView",
   components: {
-    HelloWorld
+    ContEnt,
+  },
+  mounted() {
+    AOS.init();
+  },
+};
+</script>
+<style scoped lang="scss">
+.home {
+  width: 100%;
+  height: 100vh;
+  .wrap {
+    width: 100%;
+    height: 100vh;
+    background: no-repeat center / contain;
+    background-image: url("../imgoricons/pexels-lumn-294674.jpg");
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+    .text {
+      padding-right: 1rem;
+      border-right: #eefdff solid 8px;
+      width: 22%;
+      margin-top: 35rem;
+      margin-left: 8rem;
+      position: absolute;
+      h1 {
+        color: #eefdff;
+        font-size: 3rem;
+      }
+      .textbutt {
+        border: #eefdff solid 1px;
+        h1 {
+          font-size: 1.5rem;
+          padding: 0.5rem;
+          text-align: center;
+        }
+      }
+    }
   }
 }
-</script>
+.cont {
+  background: #8fa8af;
+  height: 100%;
+}
+</style>
