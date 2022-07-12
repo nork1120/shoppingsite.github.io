@@ -212,10 +212,13 @@ export default {};
               font-size: 1.2rem;
               font-weight: 600;
             }
+            p{
+              font-weight: 600;
+            }
             .introduce {
               font-size: 0.8rem;
               line-height: 1rem;
-              color: #6d6262;
+              color: #978e8e;
               margin: 0.5rem 0 0.5rem 0;
             }
             .type {

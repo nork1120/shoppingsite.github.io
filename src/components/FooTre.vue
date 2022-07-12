@@ -25,7 +25,7 @@
             <div><h1 class="h2">手機:09-73254827</h1></div>
             <div><h1 class="h2">地址:XXX-XXX-XXX</h1></div>
           </div>
-          <div class="n2"><img src="../imgoricons/icon/logo.svg" alt="" /></div>
+          <div @click = "go" class="n2"><img src="../imgoricons/icon/logo.svg" alt="" /></div>
           <div class="n3">
             <div>
               <img src="../imgoricons/icon/icons8-facebook.svg" alt="" />
@@ -45,7 +45,12 @@ import carousel from "./CaroUsel.vue";
 export default {
   components: {
     carousel,
-  },
+  },methods:{
+    go(){
+      this.$router.push("/LoginOK/ObtAin")
+      console.log(555);
+    }
+  }
 };
 </script>
 <style scoped lang="scss">
@@ -61,6 +66,7 @@ export default {
     background-size: cover;
     opacity: 10%;
     position: absolute;
+    pointer-events: none;
   }
   .text {
     width: 100%;
@@ -75,6 +81,7 @@ export default {
         h1 {
           padding: 0.5rem;
           font-size: 0.8rem;
+          font-weight: 600;
           color: rgb(255, 255, 255);
         }
       }
@@ -85,10 +92,10 @@ export default {
           width: 20%;
           display: flex;
           justify-content: center;
-          padding: 2.5rem;
+          padding: 2rem;
           border-bottom: #275a7e solid 3px;
           h1 {
-            font-weight: 500;
+            font-size: 1rem;
           }
         }
       }

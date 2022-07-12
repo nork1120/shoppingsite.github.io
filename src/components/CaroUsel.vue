@@ -11,11 +11,41 @@
       }"
       class="mySwiper"
     >
-      <swiper-slide>Slide 1</swiper-slide><swiper-slide>Slide 2</swiper-slide
-      ><swiper-slide>Slide 3</swiper-slide><swiper-slide>Slide 4</swiper-slide
-      ><swiper-slide>Slide 5</swiper-slide><swiper-slide>Slide 6</swiper-slide
-      ><swiper-slide>Slide 7</swiper-slide><swiper-slide>Slide 8</swiper-slide
-      ><swiper-slide>Slide 9</swiper-slide>
+      <swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img
+          src="../imgoricons/2020062315929030106563881.jpg"
+          alt="" /></swiper-slide
+      ><swiper-slide
+        ><img src="../imgoricons/2020062315929030106563881.jpg" alt=""
+      /></swiper-slide>
     </swiper>
   </div>
 </template>
@@ -23,7 +53,7 @@
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/scss";
 import "swiper/scss/navigation";
-import { Navigation,Autoplay } from "swiper";
+import { Navigation, Autoplay } from "swiper";
 
 export default {
   components: {
@@ -32,12 +62,12 @@ export default {
   },
   setup() {
     return {
-      modules: [Navigation,Autoplay],
+      modules: [Navigation, Autoplay],
     };
   },
 };
 </script>
-<style scoped  lang="scss">
+<style scoped lang="scss">
 .car {
   width: 100%;
   height: 30vh;

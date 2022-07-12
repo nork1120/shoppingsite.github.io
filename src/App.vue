@@ -7,8 +7,6 @@
     <foot></foot>
   </body>
 </template>
-
-
 <script>
 import mitt from "mitt";
 import navbar from "./components/NavBar.vue";
@@ -31,10 +29,8 @@ export default {
 </script>
 
 <style  lang="scss">
-
 @import "./assets/all";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
-html,
 body,
 div,
 span,
@@ -119,10 +115,10 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-
+  font: inherit;
   vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
+  font-family: "微軟正黑體",Arial, Helvetica, sans-serif;
+} /* HTML5 display-role reset for older browsers */
 article,
 aside,
 details,
@@ -157,10 +153,6 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-* {
-  // font-family: "MS Gothic", sans-serif;
-  font-family: "MS Gothic", Helvetica, sans-serif;
 }
 *,
 *::before,

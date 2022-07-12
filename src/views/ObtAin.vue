@@ -2,7 +2,6 @@
   <LoadIng :active="isload"></LoadIng>
   <div
     class="modal fade"
-    id="exampleModal"
     tabindex="-1"
     aria-labelledby="exampleModalLabel"
     aria-hidden="true"
@@ -12,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">
-            確定要刪除{{ dle.content }}
+            確定要刪除{{ dle.title }}
           </h5>
           <button
             type="button"
@@ -35,6 +34,39 @@
       </div>
     </div>
   </div>
+  <div
+    class="modal fade picture"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+    ref="picture"
+  >
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">
+            圖片
+          </h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body"><img :src="pic" alt=""></div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            取消
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <toastall></toastall>
   <div class="newdat">
     <button type="button" class="btn btn-primary" @click="show">
@@ -48,23 +80,31 @@
       :ss="curr"
     ></mode>
   </div>
-  <table class="table table-sm">
+  <table>
     <thead>
       <tr>
         <th class="th1">分類</th>
-        <th class="th2">產品名稱</th>
-        <th class="th3">原價</th>
-        <th class="th4">售價</th>
-        <th class="th5">是否啟用</th>
-        <th class="th6">編輯</th>
+        <th class="th2">產品類別</th>
+        <th class="th3">產品名稱</th>
+        <th class="th4">敘述</th>
+        <th class="th5">圖片</th>
+        <th class="th6">原價</th>
+        <th class="th7">售價</th>
+        <th class="th8">數量</th>
+        <th class="th9">是否啟用</th>
+        <th class="th10">編輯</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="item in thing" :key="item.id">
         <td>{{ item.category }}</td>
-        <td>{{ item.content }}</td>
+        <td>{{ item.category2 }}</td>
+        <td>{{ item.title }}</td>
+        <td>{{ item.description }}</td>
+        <td><button class="btn btn-outline-success" @click="boot(item.imageUrl)" >商品圖片</button></td>
         <td>{{ item.origin_price }}</td>
         <td>{{ item.price }}</td>
+        <td>{{ item.unit }}</td>
         <td class="tdtext">
           <h1 v-if="item.is_enabled == 1">啟用</h1>
           <h2 v-else>不啟用</h2>
@@ -97,7 +137,6 @@ import mode from "../components/MyModal.vue";
 import modal from "../../node_modules/bootstrap/js/dist/modal";
 import toastall from "../components/ToastsAll.vue";
 import paginat from "@/components/PagInat.vue";
-
 export default {
   data() {
     return {
@@ -107,6 +146,9 @@ export default {
       dle: {},
       isload: false,
       page: {},
+      picture:{},
+      pic: "",
+
     };
   },
   inject: ["mitter"],
@@ -129,7 +171,11 @@ export default {
       const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/products?page=${page}`;
       this.$http.get(api).then((e) => {
         console.log(e.data);
-        this.thing = e.data.products;
+
+        this.thing =  e.data.products.filter(e=>{
+          return e.category == "海釣商品";
+        });
+        console.log(this.thing,1111);
         this.isload = false;
         this.page = e.data.pagination;
         console.log(this.page);
@@ -140,7 +186,6 @@ export default {
       this.dlemod.show();
     },
     datd() {
-      console.log(515156156);
       this.getdat();
     },
     dels() {
@@ -163,7 +208,10 @@ export default {
     isl() {
       console.log(555);
       this.isload = true;
-    },
+    },boot(e){
+      this.pic = e;
+      this.picture.show();
+    }
   },
 
   created() {
@@ -172,40 +220,61 @@ export default {
   },
   mounted() {
     this.dlemod = new modal(this.$refs.dletmod);
+    this.picture = new modal(this.$refs.picture);
+    this.mitter.emit("change", 0);
   },
 };
 </script>
 
-
-<style scoped  lang="scss">
+<style scoped lang="scss">
 .newdat {
   display: flex;
   flex-direction: row-reverse;
-  margin: 3rem;
 }
 table {
+  width: 100%;
   thead {
     width: 100%;
     tr {
+      border-bottom: black solid 1px;
       .th1 {
         width: 10%;
       }
       .th2 {
-        width: 48%;
+        width: 10%;
       }
       .th3 {
         width: 10%;
+      }
+      .th4 {
+        width: 15%;
       }
       .th5 {
         width: 8%;
       }
       .th6 {
+        width: 8%;
+      }
+      .th7 {
+        width: 5%;
+      }
+      .th8 {
+        width: 10%;
+      }
+      .th9 {
+        width: 10%;
+      }
+      .th10 {
         width: 10%;
       }
     }
   }
   tbody {
     tr {
+      border-bottom: rgb(190, 184, 184) solid 1px;
+      td {
+        padding: 0.5rem 0 0.5rem 0;
+      }
       .tdtext {
         h1 {
           font-size: 1rem;
@@ -227,14 +296,27 @@ table {
   }
 }
 .apge {
+  margin-top: 2rem;
   width: 100%;
   display: flex;
   justify-content: center;
+  margin-bottom: 3rem;
 }
 .modal {
   .modal-dialog {
     .modal-header {
       background-color: rgb(230, 57, 57);
+      .modal-title {
+        color: rgb(255, 255, 255);
+        //   background: rgb(0, 187, 93);
+      }
+    }
+  }
+}
+.picture {
+  .modal-dialog {
+    .modal-header {
+      background-color: rgba(26, 143, 45, 0.774);
       .modal-title {
         color: rgb(255, 255, 255);
         //   background: rgb(0, 187, 93);

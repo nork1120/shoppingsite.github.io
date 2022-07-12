@@ -61,7 +61,7 @@ export default {
           style: "rgb(0, 187, 93)",
           success: "登入成功",
         });
-        this.$router.push("/LoginOK")
+        this.$router.push("/LoginOK/ObtAin")
         }else{
           this.mitter.emit("test", {
           style: "rgb(230, 57, 57)",

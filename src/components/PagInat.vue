@@ -29,9 +29,10 @@
       <input
         :id="e"
         type="radio"
-        hidden
+        :disabled="page == e"
         v-model="page"
         :value="e"
+        hidden
         @click="$emit('pag', e)"
     /></label>
     <button class="btn btn-outline-primary" :disabled="paa.has_next == false" @click="$emit('pag', paa.current_page+1)" >
@@ -61,7 +62,7 @@
 export default {
   data() {
     return {
-      page: "",
+      page: "1",
     };
   },
   props: ["paa"],

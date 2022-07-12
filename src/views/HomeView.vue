@@ -50,19 +50,21 @@ export default {
     background-size: cover;
     position: absolute;
     z-index: 1;
+    animation: enlarge 5s ease-in;
     .text {
       padding-right: 1rem;
       border-right: #eefdff solid 8px;
       width: 22%;
       margin-top: 35rem;
       margin-left: 8rem;
-      position: absolute;
       h1 {
         color: #eefdff;
         font-size: 3rem;
+        font-weight: 600;
       }
       .textbutt {
         border: #eefdff solid 1px;
+        margin-top: 1rem;
         h1 {
           font-size: 1.5rem;
           padding: 0.5rem;
@@ -75,5 +77,13 @@ export default {
 .cont {
   background: #8fa8af;
   height: 100%;
+}
+@keyframes enlarge {
+  from{
+      transform: scale(1.1);
+  }
+  to{
+      transform: scale(1);
+  }
 }
 </style>

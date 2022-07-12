@@ -21,22 +21,61 @@
         <div class="modal-body row">
           <div class="reh col-5">
             <p>上傳圖片網址</p>
-            <input type="text" class="form-control" v-model="prod.imageUrl" />
+            <input
+              type="text"
+              class="form-control mod1"
+              v-model="prod.imageUrl"
+            />
             <p>上傳圖片檔案</p>
-            <input type="file" class="form-control" ref="img" @change="upda" />
+            <input
+              type="file"
+              class="form-control mod1"
+              ref="img"
+              @change="upda"
+            />
             <img :src="prod.imageUrl" alt="" />
           </div>
           <div class="let col-7">
             <p>標題</p>
-            <input type="text" class="form-control" v-model="prod.title" />
+            <input type="text" class="form-control mod1" v-model="prod.title" />
             <div class="row">
               <div class="col-6">
-                <p>分類</p>
-                <input
-                  type="text"
-                  class="form-control"
-                  v-model="prod.category"
-                />
+                <div class="row">
+                  <div class="col-6">
+                    <p>分類</p>
+                    <select class="form-select" v-model="prod.category">
+                      <option value="" hidden>請選擇</option>
+                      <option value="海釣行程">海釣行程</option>
+                      <option value="海釣商品">海釣商品</option>
+                    </select>
+                  </div>
+                  <div class="col-6">
+                    <p>類別</p>
+                    <select
+                      v-if="prod.category == '' || prod.category == '海釣行程'"
+                      :disabled="prod.category == ''"
+                      class="form-select"
+                      v-model="prod.category2"
+                    >
+                      <option value="" hidden>請選擇</option>
+                      <option value="北部的海釣地點">北部的海釣地點</option>
+                      <option value="中部的海釣地點">中部的海釣地點</option>
+                      <option value="南部的海釣地點">南部的海釣地點</option>
+                      <option value="夜釣的海釣地點">夜釣的海釣地點</option>
+                    </select>
+                    <select v-else class="form-select" v-model="prod.category2">
+                      <option value="" hidden>請選擇</option>
+                      <option value="釣桿">釣桿</option>
+                      <option value="捲線器">捲線器</option>
+                      <option value="釣魚燈/魚鉤">釣魚燈/魚鉤</option>
+                      <option value="假餌/冰桶">假餌/冰桶</option>
+                      <option value="冰桶">冰桶</option>
+                      <option value="釣魚夾克">釣魚夾克</option>
+                      <option value="漁夫帽">漁夫帽</option>
+                    </select>
+                  </div>
+                </div>
+
                 <p>原價</p>
                 <input
                   type="number"
@@ -46,7 +85,11 @@
               </div>
               <div class="col-6">
                 <p>單位</p>
-                <input type="text" class="form-control" v-model="prod.unit" />
+                <input
+                  type="text"
+                  class="form-control mod1"
+                  v-model="prod.unit"
+                />
                 <p>售價</p>
                 <input
                   type="number"
@@ -59,7 +102,7 @@
               >產品描述</label
             >
             <textarea
-              class="form-control"
+              class="form-control mod1"
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="產品描述"
@@ -69,7 +112,7 @@
               >說明內容</label
             >
             <textarea
-              class="form-control"
+              class="form-control mod1"
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="說明內容"
@@ -88,12 +131,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-            @click="nodate"
-          >
+          <button type="button" class="btn btn-secondary" @click="nodate">
             關閉
           </button>
           <button type="button" class="btn btn-primary" @click="okdate()">
@@ -112,7 +150,7 @@ export default {
   data() {
     return {
       mod: {},
-      prod: {ww:151},
+      prod: { category: "", category2: "" },
       prodle: {},
       sstate: "",
       sstyle: "",
@@ -141,11 +179,11 @@ export default {
             this.sstyle = " rgb(230, 57, 57)";
             this.smessage = [...e.data.message];
           }
-        this.mitter.emit("test", {
-        success: this.sstate,
-        style: this.sstyle,
-        message: this.smessage.join("、"),
-      });
+          this.mitter.emit("test", {
+            success: this.sstate,
+            style: this.sstyle,
+            message: this.smessage.join("、"),
+          });
           console.log(e);
         });
         this.prod = {};
@@ -172,14 +210,13 @@ export default {
           console.log(e);
           this.cll();
         });
-        this.prod = {};
+        this.prod = { category: "", category2: "" };
         this.mod.hide();
       }
     },
     nodate() {
-      this.prod = {};
+      this.prod = { category: "", category2: "" };
       this.mod.hide();
-      this.$emit("currdle");
       this.$refs.img.value = "";
     },
     ssss() {
@@ -211,6 +248,17 @@ export default {
         .reh {
           img {
             width: 100%;
+          }
+          .mod1 {
+            margin-bottom: 0.5rem;
+          }
+        }
+        .let {
+          .mod1 {
+            margin-bottom: 0.5rem;
+          }
+          .row {
+            margin-bottom: 0.5rem;
           }
         }
       }

@@ -147,7 +147,6 @@ export default {
 .content {
   width: 100%;
   background: #8fa8af;
-  height: 210vh;
   .background {
     width: 100%;
     height: 100vh;
@@ -180,10 +179,11 @@ export default {
             color: #2b6d82;
             font-size: 1.3rem;
             font-weight: 600;
+            margin-bottom: 1rem;
           }
           h2 {
             color: rgb(255, 255, 255);
-            font-weight: 500;
+            font-weight: 600;
           }
         }
       }
@@ -202,7 +202,7 @@ export default {
       .intleft {
         display: flex;
         flex-direction: row-reverse;
-        margin-bottom: 8rem;
+        padding-bottom:8rem;
       }
       .intright {
         display: flex;
@@ -267,15 +267,15 @@ export default {
           h2 {
             width: 100%;
             font-size: 1.2rem;
-            font-weight: 600;
             line-height: 50px;
+            font-weight: 600;
             color: rgba(255, 255, 255, 0.856);
           }
         }
       }
       .in3 {
         margin-top: 8rem;
-        background: rgba(202, 182, 151, 0.8) !important;
+        background: rgba(202, 182, 151, 0.8);
         .intrtext {
           h1 {
             text-align: center;

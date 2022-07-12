@@ -24,6 +24,9 @@ const routes = [
     children: [{
       path: 'ObtAin',
       component: () => import('../views/ObtAin.vue')
+    },{
+      path: 'TvWall',
+      component: () => import('../views/TvWall.vue')
     }]
   }, {
     path: '/seafishing',
@@ -38,16 +41,18 @@ const routes = [
     name: 'gobay',
     component: () => import('../views/GoBuy.vue'),
   }, {
-    path: '/checkout',
-    name: 'checkout',
-    component: () => import('../views/CheckOut.vue'),
-  }, {
     path: '/confirm',
     name: 'confirm',
     component: () => import('../views/ConFirm.vue'),
     children: [{
+      path: 'checkout',
+      component:()=>import('../views/CheckOut')
+    },{
       path: 'order',
       component:()=>import('../components/OrderCom.vue')
+    },{
+      path:'consummation',
+      component:()=>import('../components/ConsummAtion.vue')
     }]
   }
 ]
