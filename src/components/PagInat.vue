@@ -1,6 +1,6 @@
 <template>
   <div class="btn-group" role="group" aria-label="First group">
-    <button type="button" class="btn btn-outline-primary" :disabled="paa.has_pre == false"  @click="$emit('pag', paa.current_page-1)">
+    <button type="button" class="btn btn-outline-primary" :disabled="paa.has_pre == false"  @click="$emit('pag', paa.current_page-1),page--">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"
@@ -35,7 +35,7 @@
         hidden
         @click="$emit('pag', e)"
     /></label>
-    <button class="btn btn-outline-primary" :disabled="paa.has_next == false" @click="$emit('pag', paa.current_page+1)" >
+    <button class="btn btn-outline-primary"  :disabled="paa.has_next == false" @click="$emit('pag', paa.current_page+1),page++" >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

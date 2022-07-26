@@ -175,9 +175,8 @@ export default {
         this.thing = Object.values(e.data.products);
 
         this.thing = this.thing.filter((e) => {
-          return e.category == "海釣商品";
+          return e.category == "海釣行程";
         });
-        console.log( this.thing);
         console.log(this.thing.length, "66");
         this.isload = false;
         this.page.total_pages = Math.ceil(this.thing.length / this.papa);

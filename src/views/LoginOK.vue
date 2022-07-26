@@ -3,11 +3,41 @@
     <div class="ss">
       <div class="right">
         <div class="schedule">
-          <input class="sc" type="button" value="電視牆" />
-          <input class="sc" type="button" value="海釣行程" />
-          <input class="sc" type="button" value="海釣商品" />
-          <input class="sc" type="button" value="訂單" />
-          <input class="sc" type="button" value="優惠卷" />
+          <input
+            class="sc"
+            type="button"
+            value="電視牆"
+            :class="{ scs: this.$route.fullPath == '/LoginOK/TvWall' }"
+            @click="this.$router.push('/LoginOK/TvWall')"
+          />
+          <input
+            class="sc"
+            type="button"
+            value="海釣行程"
+            :class="{ scs: this.$route.fullPath == '/LoginOK/SFt' }"
+            @click="this.$router.push('/LoginOK/SFt')"
+          />
+          <input
+            class="sc"
+            type="button"
+            value="海釣商品"
+            :class="{ scs: this.$route.fullPath == '/LoginOK/ObtAin' }"
+            @click="this.$router.push('/LoginOK/ObtAin')"
+          />
+          <input
+            class="sc"
+            type="button"
+            value="訂單"
+            :class="{ scs: this.$route.fullPath == '/LoginOK/OrDer' }"
+            @click="this.$router.push('/LoginOK/OrDer')"
+          />
+          <input
+            class="sc"
+            type="button"
+            value="優惠卷"
+            :class="{ scs: this.$route.fullPath == '/LoginOK/CouPon' }"
+            @click="this.$router.push('/LoginOK/CouPon')"
+          />
         </div>
       </div>
       <div class="left">
@@ -49,6 +79,10 @@ export default {
         this.$router.push("/Login");
       }
     });
+    console.log(this.$route.fullPath);
+    if (this.$route.fullPath == "/LoginOK/ObtAin") {
+      console.log("YES!!!");
+    }
   },
 };
 </script>
@@ -76,11 +110,6 @@ export default {
           border-radius: 0px 2rem 3px 0px;
           color: rgb(255, 255, 255);
           font-size: 1.2rem;
-          &:nth-child(1) {
-            width: 70%;
-            font-size: 1.5rem;
-            background: #0085ff;
-          }
           &:nth-child(5) {
             margin-bottom: 5rem;
           }
@@ -97,5 +126,10 @@ export default {
       margin-right: 2rem;
     }
   }
+}
+.scs {
+  width: 70% !important;
+  font-size: 1.5rem !important;
+  background: #0085ff !important;
 }
 </style>

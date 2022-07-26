@@ -186,8 +186,9 @@ export default {
           });
           console.log(e);
         });
-        this.prod = {};
+        this.prod = { category: "", category2: "" };
         this.mod.hide();
+        this.$refs.img.value = "";
       } else {
         this.$emit("loadin");
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
@@ -212,6 +213,8 @@ export default {
         });
         this.prod = { category: "", category2: "" };
         this.mod.hide();
+        console.log(55665656);
+        this.$refs.img.value = "";
       }
     },
     nodate() {

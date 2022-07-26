@@ -11,40 +11,8 @@
       }"
       class="mySwiper"
     >
-      <swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img
-          src="../imgoricons/2020062315929030106563881.jpg"
-          alt="" /></swiper-slide
-      ><swiper-slide
-        ><img src="../imgoricons/2020062315929030106563881.jpg" alt=""
+      <swiper-slide v-for="(img, index) in data" :key="index"
+        ><img :src="img.picture" alt=""
       /></swiper-slide>
     </swiper>
   </div>
@@ -64,6 +32,26 @@ export default {
     return {
       modules: [Navigation, Autoplay],
     };
+  },
+  data() {
+    return {
+      data: [],
+    };
+  },
+  methods: {
+    gatdata() {
+      const ssm = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/products/all`;
+      this.$http.get(ssm).then((e) => {
+        this.data = e.data.products;
+        this.data = this.data.filter((s) => {
+          return s.category == "電視牆";
+        });
+        console.log(this.data);
+      });
+    },
+  },
+  created() {
+    this.gatdata();
   },
 };
 </script>

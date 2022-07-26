@@ -27,6 +27,9 @@ const routes = [
     },{
       path: 'TvWall',
       component: () => import('../views/TvWall.vue')
+    },{
+      path: 'SFt',
+      component: () => import('../views/SFt.vue')
     }]
   }, {
     path: '/seafishing',
