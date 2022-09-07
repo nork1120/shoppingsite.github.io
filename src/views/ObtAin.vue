@@ -66,70 +66,75 @@
     </div>
   </div>
   <toastall></toastall>
-  <div class="newdat">
-    <button type="button" class="btn btn-primary" @click="show">
-      新增商品
-    </button>
-    <mode
-      ref="shwomod"
-      @loadin="isl"
-      @currdle="currdl"
-      @all="datd"
-      :ss="curr"
-    ></mode>
+  <div class="Obtainbody">
+    <div class="newdat">
+      <button type="button" class="btn btn-primary" @click="show">
+        新增商品
+      </button>
+      <mode
+        ref="shwomod"
+        @loadin="isl"
+        @currdle="currdl"
+        @all="datd"
+        :ss="curr"
+      ></mode>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th class="th1">分類</th>
+          <th class="th2">產品類別</th>
+          <th class="th3">產品名稱</th>
+          <th class="th4">敘述</th>
+          <th class="th5">圖片</th>
+          <th class="th6">原價</th>
+          <th class="th7">售價</th>
+          <th class="th8">數量</th>
+          <th class="th9">是否啟用</th>
+          <th class="th10">編輯</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in thing" :key="item.id">
+          <td>{{ item.category }}</td>
+          <td>{{ item.category2 }}</td>
+          <td>{{ item.title }}</td>
+          <td>{{ item.description }}</td>
+          <td>
+            <button
+              class="btn btn-outline-success"
+              @click="boot(item.imageUrl)"
+            >
+              商品圖片
+            </button>
+          </td>
+          <td>{{ item.origin_price }}</td>
+          <td>{{ item.price }}</td>
+          <td>{{ item.unit }}</td>
+          <td class="tdtext">
+            <h1 v-if="item.is_enabled == 1">啟用</h1>
+            <h2 v-else>不啟用</h2>
+          </td>
+          <td class="tdbut">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              @click="curritem(item)"
+            >
+              編輯
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              @click="del(item)"
+            >
+              刪除
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  <table>
-    <thead>
-      <tr>
-        <th class="th1">分類</th>
-        <th class="th2">產品類別</th>
-        <th class="th3">產品名稱</th>
-        <th class="th4">敘述</th>
-        <th class="th5">圖片</th>
-        <th class="th6">原價</th>
-        <th class="th7">售價</th>
-        <th class="th8">數量</th>
-        <th class="th9">是否啟用</th>
-        <th class="th10">編輯</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="item in thing" :key="item.id">
-        <td>{{ item.category }}</td>
-        <td>{{ item.category2 }}</td>
-        <td>{{ item.title }}</td>
-        <td>{{ item.description }}</td>
-        <td>
-          <button class="btn btn-outline-success" @click="boot(item.imageUrl)">
-            商品圖片
-          </button>
-        </td>
-        <td>{{ item.origin_price }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.unit }}</td>
-        <td class="tdtext">
-          <h1 v-if="item.is_enabled == 1">啟用</h1>
-          <h2 v-else>不啟用</h2>
-        </td>
-        <td class="tdbut">
-          <button
-            type="button"
-            class="btn btn-outline-primary"
-            @click="curritem(item)"
-          >
-            編輯
-          </button>
-          <button
-            type="button"
-            class="btn btn-outline-danger"
-            @click="del(item)"
-          >
-            刪除
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
   <div class="apge">
     <paginat :paa="page" @pag="getdat"></paginat>
   </div>
@@ -148,7 +153,7 @@ export default {
       dle: {},
       isload: false,
       page: {},
-      papa: 10,
+      papa: 7,
       picture: {},
       pic: "",
     };
@@ -177,15 +182,18 @@ export default {
         this.thing = this.thing.filter((e) => {
           return e.category == "海釣商品";
         });
-        console.log( this.thing);
+        console.log(this.thing);
         console.log(this.thing.length, "66");
         this.isload = false;
         this.page.total_pages = Math.ceil(this.thing.length / this.papa);
         this.page.current_page = page;
         if (page == 1) {
-          this.thing = this.thing.slice(0, 10);
+          this.thing = this.thing.slice(0, 7);
           this.page.has_next = true;
           this.page.has_pre = false;
+          if (this.page.total_pages == page) {
+            this.page.has_next = false;
+          }
         } else {
           this.thing = this.thing.slice(
             this.papa * (page - 1),

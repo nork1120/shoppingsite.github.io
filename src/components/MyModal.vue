@@ -98,18 +98,20 @@
                 />
               </div>
             </div>
-            <label for="exampleFormControlTextarea1" class="form-label"
-              >產品描述</label
+            <label for="exampleFormControlTextarea1" class="form-label colorr"
+              >標題內容(黑色)</label
             >
             <textarea
               class="form-control mod1"
               id="exampleFormControlTextarea1"
               rows="3"
-              placeholder="產品描述"
+              placeholder="標題內容"
               v-model="prod.description"
             ></textarea>
-            <label for="exampleFormControlTextarea1" class="form-label"
-              >說明內容</label
+            <label for="exampleFormControlTextarea1" class="form-label colorr"
+              >說明內容(
+              <h3>灰色</h3>
+              )</label
             >
             <textarea
               class="form-control mod1"
@@ -117,6 +119,18 @@
               rows="3"
               placeholder="說明內容"
               v-model="prod.content"
+            ></textarea>
+            <label for="exampleFormControlTextarea1" class="form-label colorr"
+              >補充(
+              <h4>淺藍</h4>
+              )</label
+            >
+            <textarea
+              class="form-control mod1"
+              id="exampleFormControlTextarea1"
+              rows="3"
+              placeholder=""
+              v-model="prod.replenish"
             ></textarea>
             <input
               class="form-check-input"
@@ -150,7 +164,17 @@ export default {
   data() {
     return {
       mod: {},
-      prod: { category: "", category2: "" },
+      prod: {
+        category: "",
+        category2: "",
+        people: 1,
+        fishing: 1,
+        refrigerator: 1,
+        stageproperty: 1,
+        fishingQty: 0,
+        refrigeratorQty: 0,
+        stagepropertyQty: 0,
+      },
       prodle: {},
       sstate: "",
       sstyle: "",
@@ -186,12 +210,23 @@ export default {
           });
           console.log(e);
         });
-        this.prod = { category: "", category2: "" };
+        this.prod = {
+          category: "",
+          category2: "",
+          people: 1,
+          fishing: 1,
+          refrigerator: 1,
+          stageproperty: 1,
+          fishingQty: 0,
+          refrigeratorQty: 0,
+          stagepropertyQty: 0,
+        };
         this.mod.hide();
         this.$refs.img.value = "";
       } else {
         this.$emit("loadin");
         const api = `${process.env.VUE_APP_API}api/${process.env.VUE_APP_PATH}/admin/product`;
+
         this.$http.post(api, { data: this.prod }).then((e) => {
           console.log(e.data);
           if (e.data.success) {
@@ -211,14 +246,34 @@ export default {
           console.log(e);
           this.cll();
         });
-        this.prod = { category: "", category2: "" };
+        this.prod = {
+          category: "",
+          category2: "",
+          people: 1,
+          fishing: 1,
+          refrigerator: 1,
+          stageproperty: 1,
+          fishingQty: 0,
+          refrigeratorQty: 0,
+          stagepropertyQty: 0,
+        };
         this.mod.hide();
         console.log(55665656);
         this.$refs.img.value = "";
       }
     },
     nodate() {
-      this.prod = { category: "", category2: "" };
+      this.prod = {
+        category: "",
+        category2: "",
+        people: 1,
+        fishing: 1,
+        refrigerator: 1,
+        stageproperty: 1,
+        fishingQty: 0,
+        refrigeratorQty: 0,
+        stagepropertyQty: 0,
+      };
       this.mod.hide();
       this.$refs.img.value = "";
     },
@@ -262,6 +317,16 @@ export default {
           }
           .row {
             margin-bottom: 0.5rem;
+          }
+          .colorr {
+            display: flex;
+            font-weight: 600;
+            h3 {
+              color: #6d6262;
+            }
+            h4 {
+              color: #0a93a6;
+            }
           }
         }
       }

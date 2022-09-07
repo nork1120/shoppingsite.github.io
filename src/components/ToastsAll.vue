@@ -1,5 +1,5 @@
 <template>
-  <div class="toast-container position-absolute top-0 end-0 p-3">
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <toastOne v-for="tex in toast" :key="tex" :ssg = "tex"></toastOne>
   </div>
 </template>

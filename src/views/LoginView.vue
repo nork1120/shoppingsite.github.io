@@ -1,4 +1,5 @@
 <template>
+<LoadIng :active="isload"></LoadIng>
   <div class="login">
     <form>
       <div class="email form-floating">
@@ -42,25 +43,23 @@ export default {
         password: "",
       },
       swd: false,
+      isload:false,
     };
   },components:{
     toastall
   },
   methods: {
     login() {
+      this.isload = true;
       console.log(this.user.username);
       console.log(this.user.password);
       const api = `${process.env.VUE_APP_API}admin/signin`;
       this.$http.post(api, this.user).then((e) => {
-        
+        this.isload = false;
         const { expired, token, message } = e.data;
         console.log(e, message);
         document.cookie = `hihi = ${token};expires = ${new Date(expired)}`;
         if(e.data.success){
-          this.mitter.emit("test", {
-          style: "rgb(0, 187, 93)",
-          success: "登入成功",
-        });
         this.$router.push("/LoginOK/ObtAin")
         }else{
           this.mitter.emit("test", {

@@ -1,5 +1,12 @@
 <template>
   <div class="body">
+    <div class="go" :class="{ gogo: anim }">
+      <div class="Transi">
+        <div class="bac">
+          <div class="bacc"><div class="baccc"></div></div>
+        </div>
+      </div>
+    </div>
     <div class="content">
       <div class="contop">
         <h1>確定行程</h1>
@@ -9,25 +16,37 @@
           <div class="select">
             <div class="select_left">
               <div class="img">
-                <img
-                  src="../imgoricons/海釣行程/螢幕快照-2019-04-16-下午12.25.23-768x487.png"
-                  alt=""
-                />
+                <img :src="commo.journey.imageUrl" alt="" />
               </div>
               <div class="preview">
                 <div class="preview_left">
-                  <h1 class="ti">蘇花粉鳥林漁港</h1>
+                  <h1 class="ti">{{ commo.journey.title }}</h1>
                   <div class="quantity_box">
                     <div class="quantity">
                       <h1>旅客人數</h1>
-                      <input type="text" value="1" size="1" />
+                      <input
+                        type="text"
+                        v-model="commo.journey.people"
+                        size="1"
+                        @input="verifype()"
+                      />
                       <h1>人</h1>
                     </div>
                   </div>
                 </div>
                 <div class="preview_rigth">
-                  <h1>TWD $1,600</h1>
-                  <button type="button">確定預約</button>
+                  <div class="previewbox">
+                    <h1>TWD ${{ moe }}</h1>
+                    <div class="previewvutton">
+                      <button
+                        type="button"
+                        :disabled="commo.journey.people > 0 ? false : true"
+                        @click="Sure()"
+                      >
+                        確定預約
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -37,13 +56,34 @@
                 <h1>釣竿:單支100$</h1>
                 <div class="select">
                   <label
-                    ><input type="radio" />
-                    <h1>無</h1></label
-                  >
-                  <label class="la2"
-                    ><input type="radio" />
+                    ><input
+                      @click="commo.journey.fishingQty = 0"
+                      type="radio"
+                      v-model="commo.journey.fishing"
+                      :value="1"
+                    />
+                    <h1>無</h1>
+                  </label>
+                  <label
+                    class="la2"
+                    @click="
+                      commo.journey.fishingQty == 0
+                        ? (commo.journey.fishingQty = 1)
+                        : (commo.journey.fishingQty = commo.journey.fishingQty)
+                    "
+                    ><input
+                      type="radio"
+                      v-model="commo.journey.fishing"
+                      :value="2"
+                    />
                     <h1>租借</h1>
-                    <input class="indivual" type="text" />
+                    <input
+                      @input="verifyfis"
+                      class="indivual"
+                      type="number"
+                      :disabled="commo.journey.fishing == 1"
+                      v-model="commo.journey.fishingQty"
+                    />
                     <h1>支</h1></label
                   >
                 </div>
@@ -52,13 +92,35 @@
                 <h1>冰箱:一個50$</h1>
                 <div class="select">
                   <label
-                    ><input type="radio" />
+                    ><input
+                      @click="commo.journey.refrigeratorQty = 0"
+                      type="radio"
+                      v-model="commo.journey.refrigerator"
+                      :value="1"
+                    />
                     <h1>無</h1></label
                   >
-                  <label class="la2"
-                    ><input type="radio" />
+                  <label
+                    class="la2"
+                    @click="
+                      commo.journey.refrigeratorQty == 0
+                        ? (commo.journey.refrigeratorQty = 1)
+                        : (commo.journey.refrigeratorQty =
+                            commo.journey.refrigeratorQty)
+                    "
+                    ><input
+                      type="radio"
+                      v-model="commo.journey.refrigerator"
+                      :value="2"
+                    />
                     <h1>租借</h1>
-                    <input class="indivual" type="text" />
+                    <input
+                      @input="verifyre"
+                      class="indivual"
+                      type="number"
+                      :disabled="commo.journey.refrigerator == 1"
+                      v-model="commo.journey.refrigeratorQty"
+                    />
                     <h1>個</h1></label
                   >
                 </div>
@@ -66,14 +128,35 @@
               <div class="fishing fishing1">
                 <h1>漁具:一組100$</h1>
                 <div class="select">
-                  <label
-                    ><input type="radio" />
+                  <label @click="commo.journey.stagepropertyQty = 0"
+                    ><input
+                      type="radio"
+                      v-model="commo.journey.stageproperty"
+                      :value="1"
+                    />
                     <h1>無</h1></label
                   >
-                  <label class="la2"
-                    ><input type="radio" />
+                  <label
+                    class="la2"
+                    @click="
+                      commo.journey.stagepropertyQty == 0
+                        ? (commo.journey.stagepropertyQty = 1)
+                        : (commo.journey.stagepropertyQty =
+                            commo.journey.stagepropertyQty)
+                    "
+                    ><input
+                      type="radio"
+                      v-model="commo.journey.stageproperty"
+                      :value="2"
+                    />
                     <h1>租借</h1>
-                    <input class="indivual" type="text" />
+                    <input
+                      @input="verifyop"
+                      class="indivual"
+                      type="number"
+                      :disabled="commo.journey.stageproperty == 1"
+                      v-model="commo.journey.stagepropertyQty"
+                    />
                     <h1>組</h1></label
                   >
                 </div>
@@ -116,12 +199,145 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  inject: ["mitter"],
+  data() {
+    return {
+      commo: {},
+      anim: false,
+      moe: "",
+    };
+  },
+  methods: {
+    verifype() {
+      if (this.commo.journey.people < 0) {
+        this.commo.journey.people = 0;
+      } else if (
+        Math.floor(this.commo.journey.people) - this.commo.journey.people <
+        0
+      ) {
+        this.commo.journey.people = Math.floor(this.commo.journey.people);
+      }
+    },
+    verifyfis() {
+      if (this.commo.journey.fishingQty < 0) {
+        this.commo.journey.fishingQty = 0;
+      } else if (
+        Math.floor(this.commo.journey.fishingQty) -
+          this.commo.journey.fishingQty <
+        0
+      ) {
+        this.commo.journey.fishingQty = Math.floor(
+          this.commo.journey.fishingQty
+        );
+      }
+    },
+    verifyre() {
+      if (this.commo.journey.refrigeratorQty < 0) {
+        this.commo.journey.refrigeratorQty = 0;
+      } else if (
+        Math.floor(this.commo.journey.refrigeratorQty) -
+          this.commo.journey.refrigeratorQty <
+        0
+      ) {
+        this.commo.journey.refrigeratorQty = Math.floor(
+          this.commo.journey.refrigeratorQty
+        );
+      }
+    },
+    verifyop() {
+      if (this.commo.journey.stagepropertyQty < 0) {
+        this.commo.journey.stagepropertyQty = 0;
+      } else if (
+        Math.floor(this.commo.journey.stagepropertyQty) -
+          this.commo.journey.stagepropertyQty <
+        0
+      ) {
+        this.commo.journey.stagepropertyQty = Math.floor(
+          this.commo.journey.stagepropertyQty
+        );
+      }
+    },
+    Sure() {
+      this.commo.journey.price =
+        this.commo.journey.price * this.commo.journey.people +
+        this.commo.journey.fishingQty * 100 +
+        this.commo.journey.refrigeratorQty * 50 +
+        this.commo.journey.stagepropertyQty * 100;
+      let orderss = [];
+      orderss.push(this.commo.journey);
+      this.commo.orders = orderss;
+      this.mitter.emit("route", this.commo);
+      this.anim = true;
+      setTimeout(() => {
+        this.$router.push("/confirm/checkout");
+      }, 1500);
+    },
+  },
+  mounted() {
+    this.moe = JSON.parse(JSON.stringify(this.commo.journey.price));
+  },
+  created() {
+    this.mitter.on("return", (e) => {
+      this.commo = JSON.parse(JSON.stringify(e));
+      this.commo.journey.newprice = 0;
+    });
+    this.mitter.emit("change", 0);
+    this.mitter.emit("enter");
+    this.anim = false;
+  },
+};
 </script>
 <style scoped lang="scss">
 .body {
   display: flex;
   justify-content: center;
+  .go {
+    display: none;
+    .Transi {
+      overflow: hidden;
+      background-color: rgb(49, 171, 223);
+      background-image: url("../imgoricons/7668b05273a2d60a6083fb0073c39831.gif");
+      background-repeat: no-repeat;
+      background-position: 50% 50%;
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      animation: tra 1s linear;
+      animation-fill-mode: forwards;
+      z-index: 2;
+      top: 0;
+      .bac {
+        width: 15vw;
+        height: 30vh;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: 3;
+        .bacc {
+          width: 15%;
+          height: 120%;
+          position: absolute;
+          z-index: 3;
+          right: 10px;
+          background-color: #fff;
+          transform: rotate(40deg);
+          .baccc {
+            width: 100%;
+            height: 160%;
+            position: absolute;
+            z-index: 3;
+            right: 100px;
+            top: -100px;
+            background-color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .gogo {
+    display: flex !important;
+  }
   .content {
     margin-top: 10rem;
     margin-bottom: 3rem;
@@ -146,7 +362,6 @@ export default {};
           .select_left {
             width: 60%;
             margin-right: 2rem;
-
             .img {
               width: 100%;
               img {
@@ -161,6 +376,7 @@ export default {};
               display: flex;
               justify-content: space-between;
               .preview_left {
+                width: 50%;
                 .ti {
                   font-size: 1.8rem;
                   color: #d43030;
@@ -169,11 +385,12 @@ export default {};
                 }
                 .quantity_box {
                   display: flex;
-                  flex-direction: row-reverse;
                   width: 100%;
                   .quantity {
                     width: 78%;
                     display: flex;
+                    align-items: center;
+                    justify-content: center;
                     border: black solid 1px;
                     padding: 0.3rem;
                     input {
@@ -186,17 +403,53 @@ export default {};
                 }
               }
               .preview_rigth {
-                h1 {
-                  font-size: 2.2rem;
-                  font-weight: 900;
-                  color: #2ba86c;
-                  margin-bottom: 1rem;
-                }
-                button {
-                  padding: 0.8rem 3.4rem 0.8rem 3.4rem;
-                  border: none;
-                  background: #e53e3e;
-                  color: rgb(255, 255, 255);
+                width: 50%;
+                display: flex;
+                flex-direction: column-reverse;
+                .previewbox {
+                  width: 100%;
+                  h1 {
+                    font-size: 2.2rem;
+                    font-weight: 900;
+                    color: #2ba86c;
+                    margin-bottom: 1rem;
+                    text-align: end;
+                  }
+                  .previewvutton {
+                    width: 100%;
+                    text-align: end;
+                    button {
+                      padding: 0.8rem 3.4rem 0.8rem 3.4rem;
+                      border: 2px solid #e53e3e;
+                      border-radius: 0.3em;
+                      background-color: #fff;
+                      transition: all 0.2s ease-in-out;
+                      color: #e53e3e;
+                      position: relative;
+                      overflow: hidden;
+                      &:before {
+                        content: "";
+                        background-color: rgba(255, 255, 255, 0.5);
+                        height: 100%;
+                        width: 3em;
+                        display: block;
+                        position: absolute;
+                        top: 0;
+                        left: -4.5em;
+                        transform: skewX(-45deg) translateX(0);
+                        transition: none;
+                      }
+                      &:hover {
+                        background-color: #e53e3e;
+                        color: #fff;
+
+                        &:before {
+                          transform: skewX(-45deg) translateX(16.5em);
+                          transition: all 0.5s ease-in-out;
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -227,6 +480,11 @@ export default {};
                   align-items: center;
                   justify-content: center;
                   margin-left: 0.4rem;
+                  input[type="number"]::-webkit-outer-spin-button,
+                  input[type="number"]::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                  }
                   .indivual {
                     width: 2.6rem;
                     margin: 0 0.3rem 0 0.3rem;
@@ -250,16 +508,16 @@ export default {};
             }
           }
         }
-        .notice{
-            margin-top: 2.6rem;
-            h1{
-                font-size: 1.4rem;
-                font-weight: 600;
-                color: #A08809;
-            }
-            p{
-                line-height:34px;
-            }
+        .notice {
+          margin-top: 2.6rem;
+          h1 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #a08809;
+          }
+          p {
+            line-height: 34px;
+          }
         }
       }
       .conbottom_rigth {
@@ -281,6 +539,84 @@ export default {};
               line-height: 34px;
               color: #c1c1c1;
               font-size: 0.9rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@keyframes tra {
+  from {
+    left: -100vw;
+  }
+  to {
+    left: 0;
+  }
+}
+@media screen and (max-width: 720px) {
+  .body {
+    .content {
+      .conbottom {
+        flex-direction: column;
+        .conbottom_left {
+          width: 100%;
+          .select {
+            flex-direction: column;
+            .select_left {
+              width: 100%;
+              margin-right: 0;
+              .preview {
+                flex-direction: column;
+                .preview_left {
+                  width: 100%;
+                  .ti {
+                    width: 100%;
+                    text-align: center;
+                  }
+                  .quantity_box {
+                    justify-content: center;
+                  }
+                }
+                .preview_rigth {
+                  width: 100%;
+                  flex-direction: column;
+                  .previewbox {
+                    h1 {
+                      text-align: center;
+                    }
+                    .previewvutton {
+                      text-align: center;
+                    }
+                  }
+                }
+              }
+            }
+            .select_rigth {
+              margin-top: 1rem;
+              width: 100%;
+              border-left: none;
+              padding-left: 0;
+              h1 {
+                text-align: center;
+              }
+              .fishing {
+                .select {
+                  display: flex;
+                  flex-direction: row;
+                  label {
+                    justify-content: inherit;
+                  }
+                }
+              }
+            }
+          }
+        }
+        .conbottom_rigth{
+          width: 100%;
+          .privacy{
+            .titl{
+              width: 100%;
             }
           }
         }

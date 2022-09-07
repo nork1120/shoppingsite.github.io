@@ -8,25 +8,38 @@
         <div class="comtitl">
           <h1>商品</h1>
         </div>
-        <div class="comtext">
+        <div class="comtext" v-for="se in ConfirmOrder.orders" :key="se.id">
           <div class="img">
-            <img
-              src="../imgoricons/海釣行程/螢幕快照-2019-04-16-下午12.25.23-768x487.png"
-            />
+            <img :src="se.imageUrl" />
           </div>
           <div class="text">
             <div class="left">
-              <h1>蘇花粉鳥林漁港</h1>
-              <p>釣竿租借 2隻</p>
-              <p>漁具租借 2組</p>
+              <div class="tltop">
+                <h1>{{ se.title }}</h1>
+              </div>
+              <div class="tlbottom">
+                <p v-if="se.fishingQty > 0">
+                  釣竿租借 {{ se.fishingQty }}隻${{ se.fishingQty * 100 }}
+                </p>
+                <p v-if="se.refrigeratorQty > 0">
+                  冰箱租借 {{ se.refrigeratorQty }}個${{
+                    se.refrigeratorQty * 50
+                  }}
+                </p>
+                <p v-if="se.stagepropertyQty > 0">
+                  漁具租借 {{ se.stagepropertyQty }}組${{
+                    se.stagepropertyQty * 100
+                  }}
+                </p>
+              </div>
             </div>
             <div class="rigth">
               <div class="quantity">
                 <h1>數量</h1>
-                <p>1</p>
+                <p>{{ se.people }}</p>
               </div>
               <div class="amount">
-                <h1>1600</h1>
+                <h1>{{ se.price }}</h1>
                 <p>元</p>
               </div>
             </div>
@@ -36,8 +49,11 @@
           <div class="all_1">
             <b>總金額</b>
           </div>
+          <div class="allnewcoupon" v-if="ConfirmOrder.newcoupon != ''">
+            <h5>優惠{{ necou }}元</h5>
+          </div>
           <div class="all_2">
-            <h6>1600</h6>
+            <h6>{{ ConfirmOrder.toto }}</h6>
             <p>元</p>
           </div>
         </div>
@@ -49,23 +65,27 @@
         <div class="comtext">
           <div class="text name">
             <h4>姓名</h4>
-            <h4>傻B凱</h4>
+            <h4>{{ ConfirmOrder.name }}</h4>
           </div>
           <div class="text email">
             <h4>電子信箱</h4>
-            <h4>sadw151@gmail.com</h4>
+            <h4>{{ ConfirmOrder.mail }}</h4>
           </div>
           <div class="text liaison">
             <h4>聯絡方式</h4>
-            <h4>0956231854</h4>
+            <h4>{{ ConfirmOrder.phone1 }}</h4>
           </div>
           <div class="text payment">
             <h4>付款方式</h4>
-            <h4>信用卡</h4>
+            <h4>{{ ConfirmOrder.paymethod }}</h4>
+          </div>
+          <div class="text money" v-if="ConfirmOrder.newcoupon != ''">
+            <h4>優惠卷</h4>
+            <h4 class="green">優惠{{ necou }}元</h4>
           </div>
           <div class="text money">
             <h4>金額</h4>
-            <h4 class="green">$1,600</h4>
+            <h4 class="green">${{ ConfirmOrder.toto }}</h4>
           </div>
           <div class="text state">
             <h4>付款狀態</h4>
@@ -73,22 +93,105 @@
           </div>
           <div class="text address">
             <h4>地址</h4>
-            <h4>屏東縣東港鎮鎮海裡63號</h4>
+            <h4>{{ ConfirmOrder.address }}</h4>
           </div>
           <div class="message">
             <h4>留言</h4>
-            <p>嗨你好</p>
+            <p>{{ ConfirmOrder.message }}</p>
           </div>
         </div>
         <div class="button">
-          <button type="button">確定付款</button>
+          <button type="button" @click="GenerateOrders">確定付款</button>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+import { v4 as uuidv4 } from "uuid";
+export default {
+  inject: ["mitter"],
+  data() {
+    return {
+      ConfirmOrder: {},
+      newuser: {},
+      uuii: "",
+      cou: {},
+      necou: "",
+    };
+  },
+  mounted() {
+    scrollTo({ top: 0 });
+    this.mitter.on("returnGenOrd", (e) => {
+      this.newuser = e;
+      this.newuser.journey = {};
+      if (this.newuser.Order == undefined) {
+        this.newuser.Order = [];
+      }
+      if (this.newuser.coupon == undefined) {
+        this.newuser.coupon = [];
+      }
+    });
+    this.mitter.on("returnConfirmOrder", (e) => {
+      this.ConfirmOrder = e;
+      this.necou = this.ConfirmOrder.newcoupon.money;
+    });
+    this.mitter.emit("ConfirmOrder");
+    this.mitter.emit("GenOrd");
+    this.$emit("sty", 2);
+  },
+  methods: {
+    GenerateOrders() {
+      this.uuii = uuidv4();
+      this.uuii = this.uuii.slice(0, 20);
+      if (this.necou != undefined) {
+        let arr = [];
+        this.ConfirmOrder.coupon.forEach((e) => {
+          if (e.couponID != this.ConfirmOrder.newcoupon.couponID) {
+            arr.push(e);
+          }
+        });
+        this.ConfirmOrder.coupon = JSON.parse(JSON.stringify(arr));
+      }
+      if (this.ConfirmOrder.coupon != undefined) {
+        this.newuser.coupon = JSON.parse(
+          JSON.stringify(this.ConfirmOrder.coupon)
+        );
+      }
+      if (this.ConfirmOrder.orders[0].category == "海釣行程") {
+        this.cou.money = Math.ceil(Math.random() * 10) * 10 + 100;
+        this.cou.couponID = uuidv4();
+        this.cou.name = this.ConfirmOrder.name;
+        this.newuser.coupon.push(this.cou);
+      }
+      this.newuser.Order.push({
+        orders: this.ConfirmOrder.orders,
+        paymethod: this.ConfirmOrder.paymethod,
+        message: this.ConfirmOrder.message,
+        toto: this.ConfirmOrder.toto,
+        name: this.ConfirmOrder.name,
+        mail: this.ConfirmOrder.mail,
+        address: this.ConfirmOrder.address,
+        phone1: this.ConfirmOrder.phone1,
+        uuid: this.uuii,
+      });
+      let len = this.newuser.Order.length;
+      if (this.newuser.orders[0].category == "海釣商品") {
+        this.newuser.shoppingcart = [];
+      }
+      this.$emit("sta");
+      const api = `${process.env.VUE_APP_API}api/testrunapi/admin/product/${this.newuser.id}`;
+      this.$http.put(api, { data: this.newuser }).then((e) => {
+        console.log(e);
+        this.$emit("Fini");
+        this.mitter.emit("again", this.cou);
+        this.mitter.emit("wwuse", this.ConfirmOrder.newcoupon);
+        this.mitter.emit("Backstage", this.newuser.Order[len - 1]);
+        this.$router.push("/confirm/consummation");
+      });
+    },
+  },
+};
 </script>
 <style scoped lang="scss">
 .cont {
@@ -123,12 +226,8 @@ export default {};
         .img {
           width: 35%;
           img {
-            background: url("../imgoricons/海釣行程/螢幕快照-2019-04-16-下午12.25.23-768x487.png")
-              no-repeat center center;
-            background-size: cover;
             width: 100%;
-            height: 0;
-            padding-top: 50%;
+            object-fit: cover;
           }
         }
         .text {
@@ -137,6 +236,9 @@ export default {};
           .left {
             width: 50%;
             padding: 0.6rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             h1 {
               font-size: 1.6rem;
               font-weight: 900;
@@ -189,9 +291,18 @@ export default {};
         font-size: 1.8rem;
         font-weight: 600;
         justify-content: space-between;
+        align-items: center;
         padding: 1rem;
         b {
           color: #d43030;
+        }
+        .allnewcoupon {
+          background-color: #d86666;
+          padding: 0.5rem;
+          h5 {
+            font-size: 1.2rem;
+            color: #fff;
+          }
         }
         .all_2 {
           display: flex;
@@ -249,6 +360,20 @@ export default {};
           font-size: 1.2rem;
           font-weight: 600;
           border-radius: 0.3rem;
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .cont {
+    width: 100%;
+    .main{
+      .combutton{
+        .text{
+          h4{
+            width: 40%;
+          }
         }
       }
     }

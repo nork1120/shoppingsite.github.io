@@ -63,7 +63,7 @@
   </div>
   <div class="top">
     <button type="button" class="btn btn-primary" @click="show">
-      新增商品
+      新增電視牆
     </button>
   </div>
   <div class="row row-cols-1 row-cols-md-3 g-4">

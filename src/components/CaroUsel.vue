@@ -93,4 +93,9 @@ export default {
     }
   }
 }
+@media screen and (max-width: 720px) {
+  .car{
+    display: none;
+  }
+}
 </style>

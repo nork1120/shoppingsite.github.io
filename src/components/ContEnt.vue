@@ -2,7 +2,7 @@
   <div class="content">
     <div class="background"></div>
     <div class="context">
-      <div class="ico" >
+      <div class="ico">
         <div class="ic icon1">
           <div class="img">
             <img src="../imgoricons/icon/pin-map.svg" alt="" />
@@ -46,7 +46,7 @@
         >
           <div class="inin intr1">
             <div class="intrimg">
-              <img src="../imgoricons/okDSC01568.jpg" alt="" />
+              <img src="https://storage.googleapis.com/vue-course-api.appspot.com/runapi/1662545941188.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=bUQdek2iJWq9JRyr0rUMYkAKCpXNt48IRsgUAe5DbRS4usrkp27YmyMWeKxDq8NzO12d5d%2FtHOoHJyQVsTuPuhGiYwF%2BuE8JmAazjEqgp%2FWnFSdhEp2FLkYXcQrp21coVUaTar6yvENlR1HChd6VwOBJ84UKwb7M8h3cnX2CShn6qCgvcZ6ePnLkEYYa7tFJSi%2BPlaA9QmvdaCuUUlSpAajpv6wJmYj5JfiZ2XuPPFTRObfjWHfnJV0D4dteWBLtFcJNJi8O79kuGE4brQRSQUQ8mR7B4YkrIouB22ObdEvGYIqy9Tp3qRrOZf3eDXpS5681U3f1GpbJIQp1FtLr0Q%3D%3D" alt="" />
             </div>
             <div class="intrtext">
               <h1
@@ -77,7 +77,7 @@
         >
           <div class="inin intr2">
             <div class="intrimg">
-              <img src="../imgoricons/1619309325-2444395088-g.jpg" alt="" />
+              <img src="https://storage.googleapis.com/vue-course-api.appspot.com/runapi/1662545720302.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=fUsIXQF8GNdkymJv7rfjzgiq0VwB2vOivZpt%2B3J6RGTB5YVHjthED7CM7gyqJE26Z0TC5c8WBW4xf4je9u4HyqHIesx13Cg9Py%2F9s7hT9u9O1088eJRDQxEPUmPcAsSUNeJ8VofinqZzc1fF6BjggIlTaY219xaYTjg1CnGNv0HnkrZQybepWJsBcMiEgIwYdRTmh%2FenKnFORLSxrALgXL9MEWIzRTS%2FPG0OhP%2BUK0k%2FBpXfX8xglptjHAgwe21v0RKoY0UkmDzRDJ7%2BfIrGcObMptA1RJG01SDUqZsitsDWBKk6qj5UdW%2F%2FcuW0zwDEwndDP6Y%2Fw8ypbh7bqQzcEQ%3D%3D" alt="" />
             </div>
             <div class="intrtext">
               <h1
@@ -108,7 +108,7 @@
         >
           <div class="inin intr1 in3">
             <div class="intrimg">
-              <img src="../imgoricons/2020062315929030106563881.jpg" alt="" />
+              <img src="https://storage.googleapis.com/vue-course-api.appspot.com/runapi/1662545966963.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=SOQXWuoK7iukEOjUnnOpuT0l9d%2F0qr9weNAYVOVrLoVIBFCXA%2BI04vcag%2FzeNDjn497R8fsUvAxqccdwEkERaDli%2B9aE9CdRV73QbHC63HpSnrrBp2XW3xZb55jI8%2FbemlPSHYK%2FPAWcJ9uBkqUSMrGt0d6XNw0Rl32T70vUadhG0weS4g82E%2BVjlxstQxXNcbP2IxR91VB%2F%2BhQ7413%2FYDvhx25dVRN0qkk81V9W%2BudP0TOGcureU2zOegLn7KWdalTiIcW55Rz6sNhV%2Bo7dlE9Q0pk8PX1S30bkhzvaL3f4o7qSUe7bN%2Fl7apPNaVwmCqj8qIGCgkXvDxrua0f0HQ%3D%3D" alt="" />
             </div>
             <div class="intrtext">
               <h1
@@ -151,7 +151,7 @@ export default {
     width: 100%;
     height: 100vh;
     background: no-repeat center / contain;
-    background-image: url("../imgoricons/pexels-nirmal-rajendharkumar-3030015.jpg");
+    background-image: url("https://storage.googleapis.com/vue-course-api.appspot.com/runapi/1662546059636.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=dtgXVJTSMRj1s5cp2lNYkFCMI1d0Lhws6TmnnMMypYyPAdfIAYwbOyx13ekenKbJiygiIQqvZMkb9u8QpoC3aXSfMR4JsHOwgnsPzwJ7U0enu%2FUnmqKcqQ5f29s8slGOOrYDLfG3O5JAPFs2q5Tz9cS9sbgslOmwLLnQWtNALzDHRbkdRqS%2FRLsBQ%2FNRdPiBcZ%2FgSve2%2F0yVqTmpTzc4p0CYgZJNtr5YpG1sAHx61pjlAv0b%2FoSzw2v3ax5qMWsXa63SaJgsfgC7rp47UOjuk8nu%2BwqI3VkGkF5d2MIMbSeZFMQjlWHXUlO6hDPHDEpgKP4ZxiBy%2BfjAW43702F0XA%3D%3D");
     background-size: cover;
     opacity: 15%;
     position: fixed;
@@ -202,7 +202,7 @@ export default {
       .intleft {
         display: flex;
         flex-direction: row-reverse;
-        padding-bottom:8rem;
+        padding-bottom: 8rem;
       }
       .intright {
         display: flex;
@@ -279,6 +279,94 @@ export default {
         .intrtext {
           h1 {
             text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .content {
+    .context {
+      .ico {
+        height: 12rem;
+        width: 100%;
+        align-items: inherit;
+        .icon1 {
+          margin-top: 0.5rem;
+          width: 33%;
+          display: flex;
+          flex-direction: column;
+          margin-right: 0.2rem;
+          &:first-child {
+            margin-left: 0.2rem;
+          }
+          .img {
+            display: flex;
+            justify-content: center;
+            img {
+              width: 3rem;
+            }
+          }
+          &:nth-child(5) {
+            img {
+              width: 2.6rem;
+            }
+          }
+          .text {
+            margin-top: 0.2rem;
+            width: 100%;
+            h1 {
+              font-size: 1rem;
+            }
+            h2 {
+              font-size: 1rem;
+            }
+          }
+        }
+        .icon2 {
+          display: none;
+        }
+      }
+      .introduce {
+        .intleft {
+          .intr1 {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            width: 100%;
+            .intrimg {
+              width: 100%;
+              margin-left: 0;
+            }
+            .intrtext {
+              width: 100%;
+              margin-left: 0;
+              h1 {
+                margin-top: 0.5rem;
+                text-align: center;
+              }
+            }
+          }
+        }
+        .intright {
+          .intr2 {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem;
+            width: 100%;
+            .intrimg {
+              width: 100%;
+              margin-right: 0;
+            }
+            .intrtext {
+              width: 100%;
+              margin-right: 0;
+              h1 {
+                margin-top: 0.5rem;
+                text-align: center;
+              }
+            }
           }
         }
       }

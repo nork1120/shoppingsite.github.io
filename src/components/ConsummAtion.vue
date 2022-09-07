@@ -8,23 +8,27 @@
       <div class="comtext">
         <div class="text name">
           <h4>姓名</h4>
-          <h4>傻B凱</h4>
+          <h4>{{ noworder.name }}</h4>
         </div>
         <div class="text email">
           <h4>電子信箱</h4>
-          <h4>sadw151@gmail.com</h4>
+          <h4>{{ noworder.mail }}</h4>
         </div>
         <div class="text liaison">
           <h4>聯絡方式</h4>
-          <h4>0956231854</h4>
+          <h4>{{ noworder.phone1 }}</h4>
         </div>
         <div class="text payment">
           <h4>付款方式</h4>
-          <h4>信用卡</h4>
+          <h4>{{ noworder.paymethod }}</h4>
+        </div>
+        <div class="text money" v-if="noworder.newcoupon != ''">
+          <h4>優惠卷</h4>
+          <h4 class="green">優惠{{ money }}元</h4>
         </div>
         <div class="text money">
           <h4>金額</h4>
-          <h4 class="green">$1,600</h4>
+          <h4 class="green">${{ noworder.toto }}</h4>
         </div>
         <div class="text state">
           <h4>付款狀態</h4>
@@ -32,21 +36,44 @@
         </div>
         <div class="text address">
           <h4>地址</h4>
-          <h4>屏東縣東港鎮鎮海裡63號</h4>
+          <h4>{{ noworder.address }}</h4>
         </div>
         <div class="message">
           <h4>留言</h4>
-          <p>嗨你好</p>
+          <p>{{ noworder.message }}</p>
         </div>
       </div>
       <div class="button">
-        <button type="button">回首頁</button>
+        <button type="button" @click="front">回首頁</button>
       </div>
     </div>
   </div>
 </template>
 <script>
-export default {};
+export default {
+  inject: ["mitter"],
+  data() {
+    return {
+      noworder: {},
+      money: "",
+    };
+  },
+  mounted() {
+    scrollTo({ top: 0 });
+    this.mitter.on("returnConsumm", (e) => {
+      this.noworder = e;
+      this.money = e.newcoupon.money;
+    });
+    this.$emit("sty", 3);
+    this.mitter.emit("Consumm");
+  },
+  methods: {
+    front() {
+      this.mitter.emit("finallyended");
+      this.$router.push("/");
+    },
+  },
+};
 </script>
 <style scoped lang="scss">
 .con {
@@ -103,12 +130,24 @@ export default {};
       button {
         border: none;
         width: 70%;
-        background: #67BBEB;
+        background: #67bbeb;
         color: rgb(0, 0, 0);
         padding: 1rem;
         font-size: 1.6rem;
         font-weight: 600;
         border-radius: 0.3rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .con {
+    width: 100%;
+    .combutton {
+      .text {
+        h4 {
+          width: 40%;
+        }
       }
     }
   }

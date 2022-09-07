@@ -1,4 +1,5 @@
 <template>
+<LoadIng :active="isload"></LoadIng>
   <div class="content">
     <div class="ss">
       <div class="right">
@@ -38,6 +39,12 @@
             :class="{ scs: this.$route.fullPath == '/LoginOK/CouPon' }"
             @click="this.$router.push('/LoginOK/CouPon')"
           />
+          <input
+            class="sc"
+            type="button"
+            value="登出"
+            @click="SignOut"
+          />
         </div>
       </div>
       <div class="left">
@@ -54,6 +61,7 @@ export default {
   data() {
     return {
       ss: process.env.VUE_APP_TOKE,
+      isload: false
     };
   },
   components: {
@@ -83,6 +91,17 @@ export default {
     if (this.$route.fullPath == "/LoginOK/ObtAin") {
       console.log("YES!!!");
     }
+    scrollTo({ top: 0 });
+  },
+  methods: {
+    SignOut() {
+      this.isload = true;
+      const apiiii = `${process.env.VUE_APP_API}logout`;
+      this.$http.post(apiiii).then(() => {
+        this.isload = false;
+        this.$router.push("/Login");
+      });
+    },
   },
 };
 </script>
@@ -96,7 +115,6 @@ export default {
     margin-top: 5rem;
     .right {
       width: 15%;
-      margin-top: 2rem;
       .schedule {
         display: flex;
         flex-direction: column;
@@ -110,7 +128,10 @@ export default {
           border-radius: 0px 2rem 3px 0px;
           color: rgb(255, 255, 255);
           font-size: 1.2rem;
-          &:nth-child(5) {
+          &:first-child{
+            margin-top: 1rem;
+          }
+          &:nth-child(6) {
             margin-bottom: 5rem;
           }
           &:hover {
@@ -124,6 +145,9 @@ export default {
     .left {
       width: 80%;
       margin-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
 }

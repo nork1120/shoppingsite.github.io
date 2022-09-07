@@ -21,6 +21,7 @@ export default {
     return {};
   },
   created() {},
+  mounted() {},
   components: {
     navbar,
     foot,
@@ -28,7 +29,7 @@ export default {
 };
 </script>
 
-<style  lang="scss">
+<style lang="scss">
 @import "./assets/all";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap");
 body,
@@ -117,7 +118,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: "微軟正黑體",Arial, Helvetica, sans-serif;
+  font-family: "微軟正黑體", Arial, Helvetica, sans-serif;
 } /* HTML5 display-role reset for older browsers */
 article,
 aside,

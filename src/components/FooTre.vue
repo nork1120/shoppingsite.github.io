@@ -25,7 +25,9 @@
             <div><h1 class="h2">手機:09-73254827</h1></div>
             <div><h1 class="h2">地址:XXX-XXX-XXX</h1></div>
           </div>
-          <div @click = "go" class="n2"><img src="../imgoricons/icon/logo.svg" alt="" /></div>
+          <div @click="go" class="n2">
+            <img src="../imgoricons/icon/logo.svg" alt="" />
+          </div>
           <div class="n3">
             <div>
               <img src="../imgoricons/icon/icons8-facebook.svg" alt="" />
@@ -45,12 +47,13 @@ import carousel from "./CaroUsel.vue";
 export default {
   components: {
     carousel,
-  },methods:{
-    go(){
-      this.$router.push("/LoginOK/ObtAin")
+  },
+  methods: {
+    go() {
+      this.$router.push("/LoginOK/ObtAin");
       console.log(555);
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped lang="scss">
@@ -62,7 +65,7 @@ export default {
     width: 100%;
     height: 100%;
     background: no-repeat center / contain;
-    background-image: url("../imgoricons/pexels-nguyen-hung-10107245.jpg");
+    background-image: url("https://storage.googleapis.com/vue-course-api.appspot.com/runapi/1662546166003.jpg?GoogleAccessId=firebase-adminsdk-zzty7%40vue-course-api.iam.gserviceaccount.com&Expires=1742169600&Signature=Y1J9EPoMXYn1myHpSuT6tSJXW7hCGs7vKTzdXilCcrY3lGCYxnKPJn%2FTJJs1U6Nco2UD%2FQZVwFZ9W95ZR8gVMtS3JVd4sZpp%2FstzIWpiQE2XCNZKKuZz8onAUb9T%2Fym50BNcAuylU1hnZGL2Juq7PeQTQnAYbW2pbV6ttyMGfHFAW1we1ZmXoNC2ku7z47mEwun5OFPFd%2Fowb6Hgge4GTRm2g2IJJjcuHAMAVHwN%2Fjg0IoGwcW9PL58eVi%2Brd%2Bj6%2FU6d8tcY78AL%2B6ruh8QG6OEaduTZraOgI%2BoNgVTmO5L5hkp9sibKQMs26p1F%2FZoGpvpopS53%2BkcvKLoKN9dedg%3D%3D");
     background-size: cover;
     opacity: 10%;
     position: absolute;
@@ -141,10 +144,49 @@ export default {
         .n3 {
           justify-content: center;
           div {
-            img{
+            img {
               width: 50%;
             }
           }
+        }
+      }
+    }
+  }
+}
+@media screen and (max-width: 720px) {
+  .foot {
+    .text {
+      .footText {
+        .superior {
+          div {
+            display: none;
+            &:nth-child(4) {
+              padding: 0.5rem;
+              width: 100%;
+              display: flex;
+              h1 {
+                padding: 0.5rem;
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: rgb(255, 255, 255);
+              }
+            }
+          }
+        }
+      }
+      .middle{
+        display: none;
+      }
+      .down{
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: inherit;
+        div{
+          width: 100% !important;
+        }
+        .n2{
+          margin-bottom: 0.5rem;
         }
       }
     }
