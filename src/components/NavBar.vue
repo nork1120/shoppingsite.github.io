@@ -367,7 +367,12 @@
       </ul>
       <ul class="userico">
         <li>
-          <a href="#" @click.prevent="mod1show();ensdnav()"
+          <a
+            href="#"
+            @click.prevent="
+              mod1show();
+              ensdnav();
+            "
             ><svg
               width="35"
               height="35"
@@ -571,6 +576,12 @@ export default {
     this.mitter.on("enter", () => {
       this.mitter.emit("return", this.newuser);
     });
+    this.mitter.on("tuon",()=>{
+      this.memberin();
+    })
+    this.mitter.on("velo", () => {
+      this.mitter.emit("returnvelo",this.Certification);
+    });
     this.mitter.on("route", (e) => {
       this.order = e;
     });
@@ -680,16 +691,21 @@ export default {
           });
         });
     });
+
   },
   methods: {
     mod1show() {
-      this.Shoppingtoto = 0;
-      if (this.newuser.shoppingcart != undefined) {
-        this.newuser.shoppingcart.forEach((e) => {
-          this.Shoppingtoto += e.price * e.people;
-        });
+      if (this.Certification == false) {
+        this.memberin();
+      } else {
+        this.Shoppingtoto = 0;
+        if (this.newuser.shoppingcart != undefined) {
+          this.newuser.shoppingcart.forEach((e) => {
+            this.Shoppingtoto += e.price * e.people;
+          });
+        }
+        this.mod1.show();
       }
-      this.mod1.show();
     },
     memberin() {
       if (this.Certification == false) {
@@ -741,12 +757,20 @@ export default {
       this.variety = 200;
     },
     record() {
-      this.$refs.Record.show();
-      this.$refs.Record.newOr = this.newuser.Order;
+      if (this.Certification == false) {
+        this.memberin();
+      } else {
+        this.$refs.Record.show();
+        this.$refs.Record.newOr = this.newuser.Order;
+      }
     },
     Discount() {
-      this.$refs.Discount.show();
-      this.$refs.Discount.DiscOunt = this.newuser.coupon;
+      if (this.Certification == false) {
+        this.memberin();
+      } else {
+        this.$refs.Discount.show();
+        this.$refs.Discount.DiscOunt = this.newuser.coupon;
+      }
     },
     alltotal() {
       this.Shoppingtoto = 0;
@@ -1248,21 +1272,21 @@ export default {
                     width: 100%;
                   }
                 }
-                .riri{
+                .riri {
                   flex-direction: row;
                   align-items: center;
-                  .price{
+                  .price {
                     padding: 1rem;
-                    margin-bottom:0;
+                    margin-bottom: 0;
                   }
                 }
               }
             }
           }
         }
-        .modal-footer{
-          .totalbottom{
-            .btn-primary{
+        .modal-footer {
+          .totalbottom {
+            .btn-primary {
               width: auto;
             }
           }

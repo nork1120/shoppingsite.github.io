@@ -251,6 +251,7 @@ export default {
       page: {},
       papa: 6,
       isload: false,
+      Certif: false,
     };
   },
   components: {
@@ -364,8 +365,13 @@ export default {
       this.page.total_pages = Math.ceil(this.allthing.length / this.papa);
     },
     addShopping() {
-      this.mitter.emit("addShopping", this.comDity);
-      this.cd.hide();
+      if (this.Certif == false) {
+        this.cd.hide();
+        this.mitter.emit("tuon");
+      } else {
+        this.mitter.emit("addShopping", this.comDity);
+        this.cd.hide();
+      }
     },
   },
   created() {
@@ -374,6 +380,13 @@ export default {
   mounted() {
     this.cd = new modal(this.$refs.commodity);
     scrollTo({ top: 0 });
+    this.mitter.on("returnvelo", (e) => {
+      this.Certif = e;
+    });
+    this.mitter.on("Sls", (e) => {
+      this.Certif = e;
+    });
+    this.mitter.emit("velo");
   },
 };
 </script>
@@ -882,24 +895,24 @@ export default {
         .commodity {
           width: 80%;
           flex-direction: column;
-          .img{
+          .img {
             width: 100%;
           }
-          .text{
+          .text {
             width: 100%;
-            .text_left{
-              h1{
+            .text_left {
+              h1 {
                 text-align: center;
               }
             }
-            .boom{
-              .text_rigth{
-                .text_rigth1{
+            .boom {
+              .text_rigth {
+                .text_rigth1 {
                   justify-content: center;
                 }
               }
-              .money{
-                h1{
+              .money {
+                h1 {
                   text-align: center;
                 }
               }

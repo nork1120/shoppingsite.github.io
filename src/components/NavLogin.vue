@@ -295,6 +295,7 @@ export default {
           this.Certification = true;
           this.$emit("reg");
           this.$emit("Logmemberin", this.Certification);
+          this.mitter.emit("Sls",true);
           this.mod4.hide();
         } else {
           this.mitter.emit("test", {

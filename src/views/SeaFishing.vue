@@ -223,6 +223,7 @@ export default {
       page: {},
       papa: 4,
       isload: false,
+      Certif: false,
     };
   },
   components: {
@@ -310,9 +311,14 @@ export default {
       this.page.total_pages = Math.ceil(this.allthing.length / this.papa);
     },
     gobuy(e) {
-      this.cd.hide();
-      this.mitter.emit("journey", e);
-      this.$router.push("/gobay");
+      if (this.Certif == false) {
+        this.cd.hide();
+        this.mitter.emit("tuon");
+      } else {
+        this.cd.hide();
+        this.mitter.emit("journey", e);
+        this.$router.push("/gobay");
+      }
     },
   },
   created() {
@@ -321,6 +327,13 @@ export default {
   mounted() {
     this.cd = new modal(this.$refs.commodity);
     scrollTo({ top: 0 });
+    this.mitter.on("returnvelo",e=>{
+      this.Certif = e
+    })
+    this.mitter.on("Sls", (e) => {
+      this.Certif = e;
+    });
+    this.mitter.emit("velo");
   },
 };
 </script>
@@ -712,7 +725,7 @@ export default {
                 flex-direction: column;
                 .TtitleLeft {
                   width: 100%;
-                  h5{
+                  h5 {
                     text-align: center;
                   }
                 }
@@ -764,9 +777,9 @@ export default {
             }
             .textRight {
               margin-top: 1rem;
-              .top{
-                .trTlite{
-                  h3{
+              .top {
+                .trTlite {
+                  h3 {
                     text-align: center;
                   }
                 }
