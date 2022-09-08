@@ -37,9 +37,9 @@ export default {
     AOS.init();
   },
   methods: {
-    goSea(){
+    goSea() {
       this.$router.push("/seafishing");
-    }
+    },
   },
 };
 </script>
@@ -203,6 +203,70 @@ export default {
           border: none;
           button {
             width: 50%;
+            position: relative;
+            padding: 0.5rem;
+            background: none;
+            cursor: pointer;
+            font-weight: 900;
+            font-size: 1.5rem;
+            color: #eefdff;
+            box-shadow: hsla(210, 40%, 52%, 0.4) 2px 2px 22px;
+            z-index: 0;
+            background-color: hsl(210, 81%, 60%);
+            border: 1px solid rgba(255, 255, 255, 0);
+            overflow: hidden;
+            &::before {
+              content: "";
+              pointer-events: none;
+              opacity: 0.6;
+              background: radial-gradient(
+                  circle at 20% 35%,
+                  transparent 0,
+                  transparent 2px,
+                  hsla(210, 50%, 85%, 1) 3px,
+                  hsla(210, 50%, 85%, 1) 4px,
+                  transparent 4px
+                ),
+                radial-gradient(
+                  circle at 75% 44%,
+                  transparent 0,
+                  transparent 2px,
+                  hsla(210, 50%, 85%, 1) 3px,
+                  hsla(210, 50%, 85%, 1) 4px,
+                  transparent 4px
+                ),
+                radial-gradient(
+                  circle at 46% 52%,
+                  transparent 0,
+                  transparent 4px,
+                  hsla(210, 50%, 85%, 1) 5px,
+                  hsla(210, 50%, 85%, 1) 6px,
+                  transparent 6px
+                ),
+                radial-gradient(
+                  circle at 11% 62%,
+                  transparent 0,
+                  transparent 4px,
+                  hsla(210, 50%, 85%, 1) 5px,
+                  hsla(210, 50%, 85%, 1) 6px,
+                  transparent 6px
+                ),
+                radial-gradient(
+                  circle at 90% 57%,
+                  transparent 0,
+                  transparent 4px,
+                  hsla(210, 50%, 85%, 1) 5px,
+                  hsla(210, 50%, 85%, 1) 6px,
+                  transparent 6px
+                );
+
+              width: 100%;
+              height: 300%;
+              top: 0;
+              left: 0;
+              position: absolute;
+              animation: bubbles 3s linear infinite both;
+            }
           }
         }
       }
