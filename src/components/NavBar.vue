@@ -576,11 +576,11 @@ export default {
     this.mitter.on("enter", () => {
       this.mitter.emit("return", this.newuser);
     });
-    this.mitter.on("tuon",()=>{
+    this.mitter.on("tuon", () => {
       this.memberin();
-    })
+    });
     this.mitter.on("velo", () => {
-      this.mitter.emit("returnvelo",this.Certification);
+      this.mitter.emit("returnvelo", this.Certification);
     });
     this.mitter.on("route", (e) => {
       this.order = e;
@@ -691,7 +691,6 @@ export default {
           });
         });
     });
-
   },
   methods: {
     mod1show() {
@@ -808,6 +807,12 @@ export default {
       setTimeout(() => {
         this.opennav = false;
       }, 490);
+    },
+  },
+  watch: {
+    Certification(o, e) {
+      console.log(e);
+      this.mitter.emit("returnvelo", o);
     },
   },
 };
