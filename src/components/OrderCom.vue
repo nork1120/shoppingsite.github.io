@@ -158,12 +158,14 @@ export default {
           JSON.stringify(this.ConfirmOrder.coupon)
         );
       }
+      console.log(222222);
       if (this.ConfirmOrder.orders[0].category == "海釣行程") {
         this.cou.money = Math.ceil(Math.random() * 10) * 10 + 100;
         this.cou.couponID = uuidv4();
         this.cou.name = this.ConfirmOrder.name;
         this.newuser.coupon.push(this.cou);
       }
+      console.log(111111);
       this.newuser.Order.push({
         orders: this.ConfirmOrder.orders,
         paymethod: this.ConfirmOrder.paymethod,
@@ -175,11 +177,13 @@ export default {
         phone1: this.ConfirmOrder.phone1,
         uuid: this.uuii,
       });
+      console.log(3333333);
       let len = this.newuser.Order.length;
-      if (this.newuser.orders[0].category == "海釣商品") {
+      if (this.ConfirmOrder.orders[0].category == "海釣商品") {
         this.newuser.shoppingcart = [];
       }
       this.$emit("sta");
+      console.log(4444444);
       const api = `${process.env.VUE_APP_API}api/testrunapi/admin/product/${this.newuser.id}`;
       this.$http.put(api, { data: this.newuser }).then((e) => {
         console.log(e);
@@ -189,6 +193,7 @@ export default {
         this.mitter.emit("Backstage", this.newuser.Order[len - 1]);
         this.$router.push("/confirm/consummation");
       });
+      console.log(555555);
     },
   },
 };
@@ -368,10 +373,10 @@ export default {
 @media screen and (max-width: 720px) {
   .cont {
     width: 100%;
-    .main{
-      .combutton{
-        .text{
-          h4{
+    .main {
+      .combutton {
+        .text {
+          h4 {
             width: 40%;
           }
         }

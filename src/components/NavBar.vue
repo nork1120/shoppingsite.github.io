@@ -517,7 +517,7 @@ export default {
       NavLogin: {},
       Certification: false,
       confirm: "",
-      newuser: {},
+      newuser: {shoppingcart:[]},
       blu: 1,
       order: {},
       newth: [],
@@ -713,7 +713,7 @@ export default {
         this.$refs.NavLogin.show5();
         if (this.confirm == 1) {
           this.$refs.NavLogin.user1 = this.newuser;
-          // const api = `${process.env.VUE_APP_API}api/testrunapi/admin/product/-NATXyydMdrDyBqmWs0Y`;
+          // const api = `${process.env.VUE_APP_API}api/testrunapi/admin/product/-NATaaDj1YhS_c4GH3pC`;
           // this.$http.delete(api).then((e) => {
           //   console.log(e);
           // });
